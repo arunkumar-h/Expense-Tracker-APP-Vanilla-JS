@@ -19,8 +19,10 @@
 
 <body>
     <h1 id="headingTotal"></h1>
-    <input id="inputAmount" type="text"></input>
+    <input id="inputAmount" type="number">
+    <input id="inputDesc" type="text">
     <button id="btnAddExpense">+</button>
+    <div id="expenseTable"></div>
 
     <script>
         //Before we make the function call, the function or variables should be defined.
@@ -37,27 +39,61 @@
         //Get headingTotal element
         const headingElement = document.querySelector("#headingTotal");
 
+        //Get the reference to description element
+        const inputDescElem = document.querySelector("#inputDesc");
+
+        //Get the reference to input element
+        const inputElement = document.querySelector("#inputAmount");
+
+        //Get the reference of expenseTable
+        const expenseTableEl = document.querySelector("#expenseTable");
+
         //init value of total expense to zero
         let totalExpense = 0;
 
         //Set the heading element to totalExpense
         headingElement.textContent = totalExpense;
 
+        //All exepenses array
+        const allExpenses = [];
+
         //Read value from inputAmount and add to totalExpense on button click
         function addExpenseToTotal() {
             
+            const expenseItem = {};
+
             //read value from inputAmount
-            const inputElement = document.querySelector("#inputAmount");
             const textAmount = inputElement.value;
 
-            //convert to numer
+            //read value from inputDesc
+            const textDesc = inputDescElem.value;
+
+            //convert to number
             const expense = parseInt(textAmount, 10);
 
+            //put it into object
+            expenseItem.desc = textDesc;
+            expenseItem.amount = textAmount;
+            
+            allExpenses.push(expenseItem);
+            
+            // const data0 = `${allExpenses[0].amount} :: ${allExpenses[0].desc}`;
+            // const data1 = `${allExpenses[1].amount} :: ${allExpenses[1].desc}`
+             
             //add the value to Total Expense
             totalExpense = totalExpense + expense;
             
             //set the headingElement to totalExpense
-            headingElement.textContent = totalExpense;
+            //const someText = "The expense for this month is" + totalExpense;
+            const someText = `Total Expense : ${totalExpense}`
+            headingElement.textContent = someText;
+
+            const allExpenseHTML = allExpenses.map(expense => {
+                return `<div> ${expense.amount} :: ${expense.desc} </div>`
+            });
+
+            const joinedAllExpenseHTML = allExpenseHTML.join("");
+            expenseTableEl.textContent = joinedAllExpenseHTML;
         }
 
         // Get the button element
@@ -65,8 +101,6 @@
 
         //Listen to Click Event
         element.addEventListener("click", addExpenseToTotal, false);
-
-       
     </script>
 </body>
 </html>
