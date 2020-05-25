@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Personal Expense</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="headingTotal"></h1>
+    <input id="inputAmount" type="text"></input>
+    <button id="btnAddExpense">+</button>
+
+    <script>
+        //Before we make the function call, the function or variables should be defined.
+        //  Take a number which starts from zero
+        //  let counter = 0;
+
+        // Function to increment the number
+        // function addExpenseToTotal(){
+        //     Every click, increment a number
+        //     counter = counter + 1;
+        //     console.log(counter);
+        // }
+        
+        //Get headingTotal element
+        const headingElement = document.querySelector("#headingTotal");
+
+        //init value of total expense to zero
+        let totalExpense = 0;
+
+        //Set the heading element to totalExpense
+        headingElement.textContent = totalExpense;
+
+        //Read value from inputAmount and add to totalExpense on button click
+        function addExpenseToTotal() {
+            
+            //read value from inputAmount
+            const inputElement = document.querySelector("#inputAmount");
+            const textAmount = inputElement.value;
+
+            //convert to numer
+            const expense = parseInt(textAmount, 10);
+
+            //add the value to Total Expense
+            totalExpense = totalExpense + expense;
+            
+            //set the headingElement to totalExpense
+            headingElement.textContent = totalExpense;
+        }
+
+        // Get the button element
+        const element = document.querySelector("#btnAddExpense");
+
+        //Listen to Click Event
+        element.addEventListener("click", addExpenseToTotal, false);
+
+       
+    </script>
+</body>
+</html>
