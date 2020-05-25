@@ -111,10 +111,8 @@
             //add the value to Total Expense
             totalExpense = totalExpense + expense;
 
-            //set the headingElement to totalExpense
-            //const someText = "The expense for this month is" + totalExpense;
-            const someText = `Total Expense : ${totalExpense}`
-            headingElement.textContent = someText;
+            //Print Total Expense at the header top
+            renderTotalExpense(totalExpense);
 
             //Print list of expenses table 
             renderList(allExpenses);
@@ -157,6 +155,12 @@
             expenseTableEl.innerHTML = joinedAllExpenseHTML;
         }
 
+        function renderTotalExpense(totalExpense) {
+            //set the headingElement to totalExpense
+            //const someText = "The expense for this month is" + totalExpense;
+            const someText = `Total Expense : ${totalExpense}`;
+            headingElement.textContent = someText;
+        }
         //Controller Functions
 
         //Get Date String
@@ -170,13 +174,14 @@
 
         //Delete Item
         function deleteItem(dateValue) {
-            /* const filteredArr = [];
-             for (let i = 0; i < allExpenses.length; i++) {
-                 if(allExpenses[i].moment.valueOf()!== dateValue){
-                     filteredArr.push(allExpenses[i]);
-                 }
-             } */
-
+            console.log("called" + dateValue)
+            const filteredArr = [];
+            for (let i = 0; i < allExpenses.length; i++) {
+                console.log(allExpenses[i].moment.valueOf());
+                if (allExpenses[i].moment.valueOf() !== dateValue) {
+                    filteredArr.push(allExpenses[i]);
+                }
+            }
 
             /* const filteredArr = allExpenses.filter(expense => {
                 if (expense.moment.valueOf() !== dateValue) {
@@ -184,9 +189,12 @@
                 }
             }); */
 
-            const filteredArr = allExpenses.filter(expense => expense.moment.valueOf() !== dateValue);
-
+            //const filteredArr = allExpenses.filter(expense => expense.moment.valueOf() !== dateValue);
+            console.log(filteredArr);
+            //const deletedItem = allExpenses.filter(expense => expense.moment.valueOf() == dateValue);
             return renderList(filteredArr);
+            //console.log(deleteItem);
+            //renderTotalExpense(totalExpense - deletedItem[0].amount);
         }
 
     </script>
